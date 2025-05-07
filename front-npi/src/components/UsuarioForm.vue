@@ -8,6 +8,7 @@
         color="primary"
         dense
         required
+        data-test="user-input"
       />
 
       <v-text-field
@@ -18,6 +19,7 @@
         dense
         required
         type="email"
+        data-test="email-input"
       />
 
       <v-text-field
@@ -29,6 +31,7 @@
         required
         type="password"
         placeholder="Digite sua senha"
+        data-test="password-input"
       />
 
       <v-label class="mb-1 text-medium-emphasis">Usuário Ativo</v-label>
@@ -37,6 +40,7 @@
           class="custom-checkbox"
           @click="usuario.ativo = !usuario.ativo"
           :class="{ 'checked': usuario.ativo }"
+          data-test="checkbox"
         >
           <v-icon v-if="usuario.ativo" color="black" size="18">mdi-check</v-icon>
         </div>
@@ -53,6 +57,7 @@
         dense
         outlined
         required
+        data-test="select-items"
       />
     </v-container>
 
@@ -60,7 +65,7 @@
 
     <v-card-actions>
       <v-spacer />
-      <v-btn color="success" @click="salvar">
+      <v-btn color="success" @click="salvar" data-test="save-button">
         Salvar Usuário
         <v-icon icon="mdi-check" end />
       </v-btn>

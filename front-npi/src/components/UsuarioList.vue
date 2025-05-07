@@ -15,7 +15,7 @@
           <v-list-item-action class="d-flex align-center" style="gap: 12px;">
             <v-tooltip text="Editar">
               <template #activator="{ props }">
-                <v-btn icon color="primary" @click="abrirDialog(u)" v-bind="props">
+                <v-btn icon color="primary" @click="abrirDialog(u)" v-bind="props" data-test="edit-button">
                   <v-icon>mdi-pencil</v-icon>
                 </v-btn>
               </template>
@@ -23,7 +23,7 @@
 
             <v-tooltip text="Excluir">
               <template #activator="{ props }">
-                <v-btn icon color="error" @click="apagarUsuario(u)" v-bind="props">
+                <v-btn icon color="error" @click="apagarUsuario(u)" v-bind="props" data-test="delete-button">
                   <v-icon>mdi-delete</v-icon>
                 </v-btn>
               </template>
@@ -44,6 +44,7 @@
               outlined
               dense
               required
+              data-test="name-dialog"
             />
             <v-text-field
               v-model="usuarioEditado.email"
@@ -52,11 +53,13 @@
               dense
               required
               type="email"
+              data-test="email-dialog"
             />
             <v-checkbox
               v-model="usuarioEditado.ativo"
               label="Usuário Ativo"
               color="success"
+              data-test="checkbox-dialog"
             />
             <v-select
               v-model="usuarioEditado.cursoId"
@@ -72,7 +75,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn color="primary" @click="salvarEdicao">Salvar</v-btn>
+          <v-btn color="primary" @click="salvarEdicao" data-test="save-dialog">Salvar</v-btn>
           <v-btn color="error" text @click="dialog = false">Cancelar</v-btn>
         </v-card-actions>
       </v-card>
