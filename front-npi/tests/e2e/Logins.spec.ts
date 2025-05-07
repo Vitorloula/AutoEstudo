@@ -1,8 +1,11 @@
 import { test, expect } from '@playwright/test';
 
-test('Login e visualização da tela de gerenciamento de usuários', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
+test.beforeEach(async ({ page }) => {
+  await page.goto('http://localhost:3000');
+});
 
+
+test('Login e visualização da tela de gerenciamento de usuários', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Login' })).toBeVisible();
   await expect(page.getByText('Email')).toBeVisible();
   await expect(page.getByText('Senha')).toBeVisible();
@@ -22,3 +25,19 @@ test('Login e visualização da tela de gerenciamento de usuários', async ({ pa
   await expect(page.getByText('Novo Usuário')).toBeVisible();
   await expect(page.getByText('Lista de Usuários')).toBeVisible();
 });
+
+test('Login com credenciais inválidas exibe mensagem de erro', async ({ page }) => {
+  
+    await page.getByRole('textbox', { name: 'Email' }).fill('vitorloula@gmail.com');
+    await page.getByRole('textbox', { name: 'Senha' }).fill('1313');
+    await page.getByRole('button', { name: 'Entrar' }).click();
+
+    page.once('dialog', async dialog => {
+        console.log(dialog.message());
+        expect(dialog.message()).toContain('E-mail ou senha incorretos.');
+        await dialog.dismiss();
+    });
+
+    await expect(page.getByRole('heading', { name: 'Login' })).toBeVisible();
+  });
+  
